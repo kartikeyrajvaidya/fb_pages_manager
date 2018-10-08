@@ -3,117 +3,121 @@
 
 {%  block content %}
 
- <div id="main_cont" class="container">
+<div id="main_cont" class="container">
+    <br>
+    <h1 style="font-style:normal;font-family:Times New Roman,Times,serif;" align="centre">&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Listing</h1>
+    <br>
+    <br>
 
-
-
-
-<br>
-    <p style="font-size: 24px;">Listings</p>
-
-<div class="row">
-  <div class="col-md-10">
-    <input class="form-control" id="search_input" type="text" placeholder="Search Listings..">
-  </div>
-  <div class="col-md-2" align="end">
-      <div class="dropdown">
-          <button type="button" id = "dropdown_text" class="btn btn-md btn-outline-primary dropdown-toggle" data-toggle="dropdown">
-          All Locations
-          </button>
-          <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">San Jose, CA</a>
-              <a class="dropdown-item" href="#">Banglore, IN</a>
-              <a class="dropdown-item" href="#">Raipur, IN</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">All Locations</a>
-              <a class="dropdown-item" href="#">FB City</a>
-
+        <div class="row">
+            <div class="col-md-3">
+                <a href="https://www.growthplug.com/">
+				    <img src="http://growthplug.wpengine.com/wp-content/uploads/2018/07/newlogo.png" alt="GrowthPlug" id="logo" height="42" width="230">
+			    </a>
+            </div>
+            <div class="col-md-7">
+                <input class="form-control" id="search_input" type="text" placeholder="Search....">
             </div>
         </div>
-  </div>
-</div>
-
 <br>
+        <div class= "row">
+            <div class="col-md-3">
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <span class="fa fa-home"></span><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Dashboard</b>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="fa fa-eye"></span><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Visitors</b>
+                    </a>
+                    <a href="#" class="list-group-item active">
+                        <span class="fa fa-list-ul"></span><b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Listings</b>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="fa fa-star"></span><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reviews</b>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="fa fa-cog"></span><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Settings</b>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="fa fa-calendar"></span><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appointments</b>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <span class="fa fa-globe"></span><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Website</b>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class = "row">
+                <table id="tabl" class="table  table-hover table-responsive" align="center">
 
+                    <thead class="border rounded-top " style="background:'#D3D3D3';">
+                        <tr>
+                        <th></th>
+                        <th>Source</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Rating</th>
+                        <th>Listed</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        </tr>
+                    </thead>
 
-
-
-
-<table id="tabl" class="table  table-hover table-responsive" align="center">
-
-    <thead class="border rounded-top " style="background:'#D3D3D3';">
-            <!-- <tr><th><center>Listings</center></th></tr> -->
-          <tr>
-              <th></th>
-              <th>Source</th>
-              <th>Name</th>
-              <th>Address</th>
-              <th>City</th>
-              <th>Phone</th>
-              <th>Rating</th>
-              <th>Listed</th>
-              <th>Status</th>
-              <th>Action</th>
-          </tr>
-    </thead>
-
-        <tbody>
-          <tr>
-            <td><i class="fa fa-google" style="font-size:36px" > </i></td>
-            <td>Google</td>
-            <td>ABC Dental</td>
-            <td>Street 2, Central Avenue</td>
-            <td>San Jose, CA</td>
-            <td>111-111-1111</td>
-            <td>3/5</td>
-            <td>Yes</td>
-            <td><a href="#"><i class="material-icons green-text text-darken-4">priority_high</i></a></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-yahoo" style="font-size:36px" > </i></td>
-            <td>Yahoo!</td>
-            <td>ABC Dental Care</td>
-            <td>221-b, Baker Street</td>
-            <td>Banglore, IN</td>
-            <td>223.222.2222</td>
-            <td>4/5</td>
-            <td>No</td>
-            <td><a href="#"><i class="material-icons green-text text-darken-4">priority_high</i></a></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><i class="fa fa-yelp" style="font-size:36px" > </i></td>
-            <td>Yelp</td>
-            <td>ABC Dental Hospital</td>
-            <td>C2, Amrapali Sapphire</td>
-            <td>Raipur, IN</td>
-            <td>3333-333-3333</td>
-            <td>3/5</td>
-            <td>No</td>
-            <td><a href="#"><i class="material-icons green-text text-darken-4">priority_high</i></a></td>
-            <td></td>
-          </tr>
-           <tr>
-            <td><i class="fa fa-foursquare" style="font-size:36px" > </i></td>
-            <td>FourSquare</td>
-            <td>ABC Dental Clinic</td>
-            <td>C2, Amrapali Sapphire</td>
-            <td>Raipur, IN</td>
-            <td>3333-333-3333</td>
-            <td>3/5</td>
-            <td>No</td>
-            <td><a href="#"><i class="material-icons green-text text-darken-4">priority_high</i></a></td>
-            <td></td>
-          </tr>
-        </tbody>
-
-
-      </table>
-
-
+                    <tbody>
+                         <tr>
+                        <td><i class="fa fa-google" style="font-size:20px" > </i></td>
+                        <td>Google</td>
+                        <td>ABC Dental</td>
+                        <td>2101 California St</td>
+                        <td>111.111.111</td>
+                        <td>3/5</td>
+                        <td>Yes</td>
+                        <td><a href="#"><i class="material-icons green-text text-darken-4">check</i></span></a></td>
+                        <td><button class="btn btn-primary disabled">Update</button></td>
+                        </tr>
+                        <tr>
+                        <td><i class="fa fa-yahoo" style="font-size:20px" > </i></td>
+                        <td>Yahoo!</td>
+                        <td>ABC Dental</td>
+                        <td>2101 California St</td>
+                        <td>222.222.222</td>
+                        <td>4/5</td>
+                        <td>No</td>
+                        <td><a href="#"><i class="material-icons green-text text-darken-4">clear</i></a></td>
+                        <td><button class="btn btn-primary disabled">Update</button></td>
+                        </tr>
+                        <tr>
+                        <td><i class="fa fa-yelp" style="font-size:20px" > </i></td>
+                        <td>Yelp</td>
+                        <td>ABC Dental</td>
+                        <td>2101 California St</td>
+                        <td>333.333.333</td>
+                        <td>3/5</td>
+                        <td>No</td>
+                        <td><a href="#"><i class="material-icons green-text text-darken-4">clear</i></a></td>
+                        <td><button class="btn btn-primary disabled">Update</button></td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa fa-foursquare" style="font-size:20px" > </i></td>
+                            <td>FourSquare</td>
+                            <td>ABC Dental</td>
+                            <td>2101 California St</td>
+                            <td>444.444.444</td>
+                            <td>3/5</td>
+                            <td>No</td>
+                            <td><a href="#"><i class="material-icons green-text text-darken-4">check</i></a></td>
+                            <td><button class="btn btn-primary disabled">Update</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
 </div>
-
 <!--<a id="asd" href="/fbapp/update_form?id=" target="_blank">-->
 <!--Google-->
 <!--</a>-->

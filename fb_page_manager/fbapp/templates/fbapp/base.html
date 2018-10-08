@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -21,24 +21,31 @@
 
     <title>{{title|safe }}</title>
 
-
+<style>
+table, th, td {
+    border: 1px black ;
+    font-size: 14px;
+    font-style: normal;
+    font-family: "Times New Roman", Times, serif;
+}
+body {
+    background-color:#f4f7f9 ;
+}
+nav {
+    background-color:#d9d9d9 ;
+}
+</style>
 </head>
 
 <body>
 
-        <nav class="navbar navbar-expand-md  bg-light  navbar-light">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
             <a class="navbar-brand" href="#">
-                    <img src="https://cdn3.iconfinder.com/data/icons/rcons-social/32/facebook_fb_social_social_media-512.png" alt="Logo" style="width:40px;">
-            </a>
-            <a class="navbar-brand" href="#">
-                Page manager
+                GrowthPlug Page Administrator
             </a>
 
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" data-toggle="modal" href="#modal_about_project">About</a>
-                </li>
 
                 {% if title == "Dashboard" %}
 
@@ -109,24 +116,6 @@
             $("#tabl tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
-        });
-
-
-        $(".dropdown-item").click(function(){
-            console.log("dropdown clickEEEEEEEEEDDD");
-            var text = $(this).text();
-            console.log(text);
-            document.getElementById("dropdown_text").innerHTML = text;
-
-            var value =  ""
-            if(text != "All Locations"){
-                value =  text.toLowerCase();
-            }
-            $("#tabl tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-
-
         });
 
         $('#logout').click(function() {
@@ -346,23 +335,19 @@
 
         var x={{ pages|safe }};
         var y={{ personal|safe }};
-        // var mega_details = {{ mega_details|safe}};
-        // console.log("MEGAAAA")
-        // console.log(mega_details)
-        // console.log("MEGAAAA ENDEDDDDD")
-
-        // var cf={{ csrf_token }};
-        // console.log(csrf);
-        // document.getElementById("welcome").innerHTML='Welcome, '+y.name;
+        console.log('____________________________');
+        console.log(x);
+        console.log('____________________________');
+        console.log(y)
+        console.log('____________________________');
         x=x.data;
         console.log(x);
         $.each(x, function (i, v) {
-            //list += '<li class="page" id="'+i+'">' + '<a>' + v.name + '</a></li>'
             console.log(v);
-            var button='<td><button data-toggle="modal" data-target="#modal1" class="btn-outline-primary btn page modal-trigger" id="' + i + '">Update</button></td></tr>';
+            var button='<td><button data-toggle="modal" data-target="#modal1" class="btn btn-primary page modal-trigger" id="' + i + '">Update</button></td></tr>';
             var name='<td>' + v.name +'</td>';
             var ph='<td>'+ v.phone + '</td>';
-            var row='<tr><td> <i class="fa fa-facebook-official" style="font-size:36px; padding: 4px; background: #3b5998; color: white;"></i> </td>  <td>Facebook</td>'+name+'<td>Connought Place</td><td>FB City</td><td>9876543210</td><td>4/5</td><td>No</td><td><i class="material-icons green-text text-darken-4">check</i></td>' + button;
+            var row='<tr><td> <i class="fa fa-facebook-f" style="font-size:20px;"></i> </td>  <td>Facebook</td>'+name+'<td>Connought Place</td><td>9876543210</td><td>4/5</td><td>No</td><td><i class="material-icons green-text text-darken-4">check</i></td>' + button;
             $('#tabl tr:last').after(row);
         });
 
