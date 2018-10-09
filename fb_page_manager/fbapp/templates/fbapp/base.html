@@ -31,10 +31,10 @@ th, td {
     font-family: "Times New Roman", Times, serif;
 }
 body {
-    background-color:#f2f2f2 ;
+    background-color:#FFFFFF ;
 }
 nav {
-    background-color:#a4a7ad ;
+    background-color:#68a7ca ;
 
 }
 </style>
@@ -138,35 +138,6 @@ nav {
 
         });
 
-
-
-        $('#editPage').click(function(){
-
-            document.getElementById("modal_edit_button").hidden = false;
-            document.getElementById("editPage").hidden = true;
-
-            document.getElementById("general_info").disabled = false;
-            document.getElementById("company_overview").disabled = false;
-            document.getElementById("about").disabled = false;
-            document.getElementById("bio").disabled = false;
-            document.getElementById("description").disabled = false;
-            document.getElementById("impressum").disabled = false;
-
-            document.getElementById("phone").disabled = false;
-            document.getElementById("website").disabled = false;
-            document.getElementById("emails").disabled = false;
-            document.getElementById("whatsapp_number").disabled = false;
-
-
-            document.getElementById("city").disabled = false;
-            document.getElementById("state").disabled = false;
-            document.getElementById("country").disabled = false;
-            document.getElementById("zip").disabled = false;
-            document.getElementById("street").disabled = false;
-        });
-
-
-
     $('#modal_edit_button').click(function() {
       var d={'csrfmiddlewaretoken': '{{ csrf_token}}','access_token':document.getElementById("pageToken").value, 'pageId':document.getElementById("id").value};
       var c=0;
@@ -183,22 +154,6 @@ nav {
         else
         {
           $.alert('Please enter a valid 10 digit phone number', 'Inavlid Input');
-          flag=0;
-        }
-      }
-
-
-      if(document.getElementById("whatsapp_number").value != "")
-      {
-        if(document.getElementById("whatsapp_number").value.length==10 && !isNaN(document.getElementById("whatsapp_number").value))
-        {
-          d['has_whatsapp_number']= true;
-          d['whatsapp_number']= document.getElementById("whatsapp_number").value;
-          c+=1;
-        }
-        else
-        {
-          $.alert('Please enter a valid 10 digit Whatsapp number', 'Inavlid Input');
           flag=0;
         }
       }
@@ -246,45 +201,17 @@ nav {
         }
 
 
-      if(document.getElementById("general_info").value != "")
-      {
-          c+=1;
-          d['general_info']= document.getElementById("general_info").value;
-      }
-
       if(document.getElementById("about").value != "")
       {
           c+=1;
           d['about']= document.getElementById("about").value;
       }
 
-
-      if(document.getElementById("bio").value != "")
-      {
-          c+=1;
-          d['bio']= document.getElementById("bio").value;
-      }
-
-
       if(document.getElementById("description").value != "")
       {
           c+=1;
           d['description']= document.getElementById("description").value;
       }
-
-      if(document.getElementById("company_overview").value != "")
-      {
-          c+=1;
-          d['company_overview']= document.getElementById("company_overview").value;
-      }
-
-      if(document.getElementById("impressum").value != "")
-      {
-          c+=1;
-          d['impressum']= document.getElementById("impressum").value;
-      }
-
-
 
 
       if(document.getElementById("city").value != "")
@@ -344,39 +271,8 @@ nav {
 
         $.each(x, function (i, v) {
 
-
-
-            //********************Testing**********************
-        var id = i;
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          console.log("************Response Text*************")  ;
-          console.log(this.responseText);
-          var res=JSON.parse(this.responseText);
-          var bio = '';
-          $.each(res, function(key, value) {
-              if(key=='phone')
-              {
-                 bio = value
-              }
-          });
-            }
-        };
-        var parm='pageId='+x[parseInt(id)].id + '&pageToken=' + x[parseInt(id)].access_token + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
-        xhttp.open("POST", "/fbapp/page_detail", false);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send(parm);
-
-
-        //********************Testing**********************
-
-
-
-
             var button='<td><button data-toggle="modal" data-target="#modal1" class="btn btn-primary page modal-trigger" id="' + i + '">Update</button></td></tr>';
             var name='<td>' + v.name +'</td>';
-            var bio='<td>' + bio +'</td>';
             var ph='<td>'+ v.page_info.phone + '</td>';
             var loca = v.page_info.location;
             if (typeof loca !== 'undefined'){
@@ -391,19 +287,38 @@ nav {
                 var published = '<td><i class="material-icons green-text text-darken-4">clear</i></td>';
 
             }else{
-                var published = '<td><i class="material-icons green-text text-darken-4">clear</i></td>';
+                var published = '<td><i class="material-icons green-text text-darken-4">check</i></td>';
 
             }
 
             if ( typeof v.page_info.overall_star_rating !== 'undefined' ){
-                var rating = '<td>' + v.page_info.overall_star_rating + '</td>' ;
+                if(v.page_info.overall_star_rating == 1){
+                    var rating = '<td> <span class="fa fa-star checked"> </span> </td>' ;
+                }
+                if(v.page_info.overall_star_rating == 2){
+                    var rating = '<td> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"> </span></td>' ;
+                }
+                if(v.page_info.overall_star_rating == 3){
+                    var rating = '<td> <span class="fa fa-star checked"></span> <span class="fa fa-star checked"> </span><span class="fa fa-star checked"> </span></td>' ;
+                }
+                if(v.page_info.overall_star_rating == 4){
+                    var rating = '<td> <span class="fa fa-star checked"></span><span class="fa fa-star checked"> </span><span class="fa fa-star checked"> </span><span class="fa fa-star checked"> </span> </td>' ;
+                }
+                if(v.page_info.overall_star_rating == 5){
+                    var rating = '<td> <span class="fa fa-star checked"></span><span class="fa fa-star checked"> </span><span class="fa fa-star checked"> </span><span class="fa fa-star checked"> </span><span class="fa fa-star checked"> </span> </td>' ;
+                }
+
 
             }else{
                 var rating = '<td>' + "Not Rated" + '</td>';
 
             }
+            if(v.page_info.verification_status == 'not_verified'){
+                var verified = '<td> No </td>' ;
+            }else{
+                var verified = '<td> Yes </td>' ;
+            }
 
-            var verified = '<td>' + v.page_info.verification_status + '</td>' ;
 
 
             var row='<tr><td> <i class="fa fa-facebook-f" style="font-size:20px;"></i> </td>  <td>Facebook</td>'+name +   address  + ph +  rating + verified +  published   + button;
@@ -415,31 +330,26 @@ nav {
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
         $('.page').click(function() {
             $('input').val('');
-            document.getElementById("modal_edit_button").hidden = true;
+            document.getElementById("modal_edit_button").hidden = false;
 
-            document.getElementById("general_info").disabled = true;
-            document.getElementById("company_overview").disabled = true;
-            document.getElementById("about").disabled = true;
-            document.getElementById("bio").disabled = true;
-            document.getElementById("impressum").disabled = true;
-            document.getElementById("description").disabled = true;
+            document.getElementById("about").disabled = false;
+            document.getElementById("description").disabled = false;
 
-            document.getElementById("phone").disabled = true;
-            document.getElementById("website").disabled = true;
-            document.getElementById("emails").disabled = true;
-            document.getElementById("whatsapp_number").disabled = true;
+            document.getElementById("phone").disabled = false;
+            document.getElementById("website").disabled = false;
+            document.getElementById("emails").disabled = false;
 
-            document.getElementById("city").disabled = true;
-            document.getElementById("state").disabled = true;
-            document.getElementById("country").disabled = true;
-            document.getElementById("zip").disabled = true;
-            document.getElementById("street").disabled = true;
-            document.getElementById("editPage").hidden = false;
+            document.getElementById("city").disabled = false;
+            document.getElementById("state").disabled = false;
+            document.getElementById("country").disabled = false;
+            document.getElementById("zip").disabled = false;
+            document.getElementById("street").disabled = false;
 
         var id = $(this).attr('id');
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+
           console.log("************Response Text*************")  ;
           console.log(this.responseText);
           var res=JSON.parse(this.responseText);
@@ -481,11 +391,6 @@ nav {
         xhttp.send(parm);
 
         });
-
-
-
-
-
 
 
     });

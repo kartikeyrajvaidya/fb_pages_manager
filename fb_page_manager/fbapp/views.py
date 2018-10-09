@@ -53,10 +53,6 @@ def dashboard(request):
         details=json.dumps(details.json())
 
         d2=json.dumps(d2.json())
-        print("********D2**********")
-        print(d2);
-        print("*********Detail*********")
-        print(details);
         return render(request, "fbapp/dashboard.html",{"title":"Dashboard",'pages': page_ids_list, 'personal':d2 , 'page_list' : page_list  }) #, 'mega_details': mega_details})
     else:
         # here use sessions to save user-id and pageids/tokens
@@ -70,7 +66,7 @@ def dashboard(request):
 def get_page_details(request):
     if request.method=="POST":
         print("HELLO")
-        fields='name,general_info,about,bio,impressum,phone,whatsapp_number,emails,website,description,company_overview,fan_count,link,overall_star_rating,rating_count,displayed_message_response_time,is_published,verification_status,location'
+        fields='name,about,phone,emails,website,description,fan_count,link,overall_star_rating,location,displayed_message_response_time'
         pageToken=request.POST.get("pageToken",'')
         pageId=request.POST.get("pageId",'')
         header='OAuth ' + pageToken
@@ -83,44 +79,6 @@ def get_page_details(request):
 
 #not used
 def get_form(request):
-    # # if this is a POST request we need to process the form data
-    # if request.method == 'POST':
-    #     # create a form instance and populate it with data from the request:
-    #     d = {}
-    #     if request.GET.get('access_token_for_update','') is not None:
-    #         d['access_token_for_update']=request.GET.get('access_token_for_update','')
-    #     if request.GET.get('page_id_for_update','') is not None:
-    #         d['page_id_for_update']=request.GET.get('page_id_for_update','')
-    #     if request.GET.get('name','') is not None:
-    #         d['name']=request.GET.get('name','')
-    #     if request.GET.get('about','') is not None:
-    #         d['about']=request.GET.get('about','')
-    #     if request.GET.get('bio','') is not None:
-    #         d['bio']=request.GET.get('bio','')
-    #     if request.GET.get('website','') is not None:
-    #         d['website']=request.GET.get('website','')
-    #     if request.GET.get('phone','') is not None:
-    #         d['phone']=request.GET.get('phone','')
-    #     if request.GET.get('whatsapp_number','') is not None:
-    #         d['whatsapp_number']=request.GET.get('whatsapp_number','')
-    #     if request.GET.get('general_info','') is not None:
-    #         d['general_info']=request.GET.get('general_info','')
-    #     if request.GET.get('impressum','') is not None:
-    #         d['impressum']=request.GET.get('impressum','')
-    #     if request.GET.get('description','') is not None:
-    #         d['description']=request.GET.get('description','')
-    #     if request.GET.get('company_overview','') is not None:
-    #         d['company_overview']=request.GET.get('company_overview','')
-
-    #     form = forms.SimpleForm(initial=d)
-
-    #     # check whether it's valid:
-    #     if form.is_valid():
-    #         # process the data in form.cleaned_data as required
-    #         # ...
-    #         # redirect to a new URL:
-    #         return HttpResponseRedirect('/dashboard/')
-    # else:
 
     id = request.GET.get("id",'')
     form = forms.SimpleForm()
