@@ -24,20 +24,40 @@ def dashboard(request):
         header="OAuth "+ token
         details=call('GET', 'https://graph.facebook.com/me/accounts', headers={"Authorization": header})
         d2=call('GET','https://graph.facebook.com/me', headers={"Authorization":header})
+
+        # ------------ new stuff ----------------- #
+
+        page_ids_list = details.json()["data"]
+        page_attributes='name,phone,overall_star_rating,is_published,location,verification_status'
+
+        dict_details = details.json()
+
+        page_list = []
+        for index in range(len(page_ids_list)):
+            page_id = page_ids_list[index]["id"]
+            page_token = page_ids_list[index]["access_token"]
+            api_url="https://graph.facebook.com/"+ page_id + "?fields="+page_attributes
+            header='OAuth ' + page_token
+            page_obj = call('GET', api_url, headers={"Authorization": header})
+
+            page_obj_json = page_obj.json()
+            page_obj_json["is_published"] = str(page_obj_json["is_published"])
+            page_ids_list[index]["page_info"] = page_obj_json
+
+            page_list.append(json.dumps(page_obj.json()))
+
+
+        # ------------ new stuff ends----------------- #
+
+        typo = str(type(details.json()))
         details=json.dumps(details.json())
+
         d2=json.dumps(d2.json())
-        #print(details)
-        #pages = details["data"]
-        # mega_details = {}
-        # for each_page in pages:
-        #     data_dict = {}
-        #     data_dict["pageToken"] = each_page["access_token"]
-        #     data_dict["pageId"] = each_page["id"]
-        #     res_dict = call("POST", "/fbapp/page_detail", data=data_dict)
-        #     mega_details[each_page["id"]] = res_dict
-        # details = {"data": [{"id": "946102352202285", "perms": ["ADMINISTER", "EDIT_PROFILE", "CREATE_CONTENT", "MODERATE_CONTENT", "CREATE_ADS", "BASIC_ADMIN"], "category": "Community", "access_token": "EAAGzj2LLCQYBAICnFi5k3j4yD6mKfM0yUVQIZAupwpOgwdmCiiMrAx3I7U32gYHZCplwruizxTHZCa5YRzJba1SsUcYr7rUnNM2b630FokZAPYLP0S556EvLPQraaozQeZAos1IYUKSUnZBTxB3ETaoZCivIIKVV9dEDWMiZBY3jfL7UU7r3hHu29OUK5FNBydujucPnwhCKOwZDZD", "name": "Placement Assistance Cell", "category_list": [{"id": "2612", "name": "Community"}]}], "paging": {"cursors": {"after": "OTQ2MTAyMzUyMjAyMjg1", "before": "OTQ2MTAyMzUyMjAyMjg1"}}}
-        # d2 = { "name": "Sanskar Sharma", "id": "123123"}
-        return render(request, "fbapp/dashboard.html",{"title":"Dashboard",'pages': details, 'personal':d2}) #, 'mega_details': mega_details})
+        print("********D2**********")
+        print(d2);
+        print("*********Detail*********")
+        print(details);
+        return render(request, "fbapp/dashboard.html",{"title":"Dashboard",'pages': page_ids_list, 'personal':d2 , 'page_list' : page_list  }) #, 'mega_details': mega_details})
     else:
         # here use sessions to save user-id and pageids/tokens
         details = {}

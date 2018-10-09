@@ -22,27 +22,30 @@
     <title>{{title|safe }}</title>
 
 <style>
-table, th, td {
+
+
+th, td {
     border: 1px black ;
     font-size: 14px;
     font-style: normal;
     font-family: "Times New Roman", Times, serif;
 }
 body {
-    background-color:#f4f7f9 ;
+    background-color:#f2f2f2 ;
 }
 nav {
-    background-color:#d9d9d9 ;
+    background-color:#a4a7ad ;
+
 }
 </style>
 </head>
 
 <body>
 
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav class="navbar navbar-expand-sm ">
 
-            <a class="navbar-brand" href="#">
-                GrowthPlug Page Administrator
+            <a class="navbar-brand" >
+                <B style="color: #070707;">GrowthPlug Page Administrator</B>
             </a>
 
             <ul class="navbar-nav ml-auto">
@@ -50,7 +53,7 @@ nav {
                 {% if title == "Dashboard" %}
 
                     <li class="nav-item">
-                        <a class="nav-link " id="logout" href="#">Logout</a>
+                        <a class="nav-link " id="logout" style="color: #070707;" href=#>Logout</a>
                     </li>
 
                 {% endif %}
@@ -333,21 +336,77 @@ nav {
     });
 
 
+        var page_list = {{page_list | safe }};
+
         var x={{ pages|safe }};
         var y={{ personal|safe }};
-        console.log('____________________________');
-        console.log(x);
-        console.log('____________________________');
-        console.log(y)
-        console.log('____________________________');
-        x=x.data;
-        console.log(x);
+        //x=x.data;
+
         $.each(x, function (i, v) {
-            console.log(v);
+
+
+
+            //********************Testing**********************
+        var id = i;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          console.log("************Response Text*************")  ;
+          console.log(this.responseText);
+          var res=JSON.parse(this.responseText);
+          var bio = '';
+          $.each(res, function(key, value) {
+              if(key=='phone')
+              {
+                 bio = value
+              }
+          });
+            }
+        };
+        var parm='pageId='+x[parseInt(id)].id + '&pageToken=' + x[parseInt(id)].access_token + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
+        xhttp.open("POST", "/fbapp/page_detail", false);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(parm);
+
+
+        //********************Testing**********************
+
+
+
+
             var button='<td><button data-toggle="modal" data-target="#modal1" class="btn btn-primary page modal-trigger" id="' + i + '">Update</button></td></tr>';
             var name='<td>' + v.name +'</td>';
-            var ph='<td>'+ v.phone + '</td>';
-            var row='<tr><td> <i class="fa fa-facebook-f" style="font-size:20px;"></i> </td>  <td>Facebook</td>'+name+'<td>Connought Place</td><td>9876543210</td><td>4/5</td><td>No</td><td><i class="material-icons green-text text-darken-4">check</i></td>' + button;
+            var bio='<td>' + bio +'</td>';
+            var ph='<td>'+ v.page_info.phone + '</td>';
+            var loca = v.page_info.location;
+            if (typeof loca !== 'undefined'){
+                var address='<td>'+ loca.street + loca.city + loca.state  + '</td>';
+
+            }else{
+                var address='<td>'+ " Not Provided "  + '</td>';
+
+            }
+
+            if (v.page_info.is_published == "False"){
+                var published = '<td><i class="material-icons green-text text-darken-4">clear</i></td>';
+
+            }else{
+                var published = '<td><i class="material-icons green-text text-darken-4">clear</i></td>';
+
+            }
+
+            if ( typeof v.page_info.overall_star_rating !== 'undefined' ){
+                var rating = '<td>' + v.page_info.overall_star_rating + '</td>' ;
+
+            }else{
+                var rating = '<td>' + "Not Rated" + '</td>';
+
+            }
+
+            var verified = '<td>' + v.page_info.verification_status + '</td>' ;
+
+
+            var row='<tr><td> <i class="fa fa-facebook-f" style="font-size:20px;"></i> </td>  <td>Facebook</td>'+name +   address  + ph +  rating + verified +  published   + button;
             $('#tabl tr:last').after(row);
         });
 
@@ -378,10 +437,10 @@ nav {
             document.getElementById("editPage").hidden = false;
 
         var id = $(this).attr('id');
-        console.log("HIIIIIIIIIIIIIIIIIIII")
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+          console.log("************Response Text*************")  ;
           console.log(this.responseText);
           var res=JSON.parse(this.responseText);
 

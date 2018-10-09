@@ -4,13 +4,13 @@
 {%  block content %}
 
 <div id="main_cont" class="container">
-    <br>
+    <br><br>
     <h1 style="font-style:normal;font-family:Times New Roman,Times,serif;" align="centre">&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Listing</h1>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Listings</h1>
     <br>
-    <br>
+
 
         <div class="row">
             <div class="col-md-3">
@@ -18,7 +18,7 @@
 				    <img src="http://growthplug.wpengine.com/wp-content/uploads/2018/07/newlogo.png" alt="GrowthPlug" id="logo" height="42" width="230">
 			    </a>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-9">
                 <input class="form-control" id="search_input" type="text" placeholder="Search....">
             </div>
         </div>
@@ -51,18 +51,18 @@
             </div>
             <div class="col-md-9">
                 <div class = "row">
-                <table id="tabl" class="table  table-hover table-responsive" align="center">
+                <table id="tabl" class="table  table-hover table-responsive table-bordered " align="center">
 
-                    <thead class="border rounded-top " style="background:'#D3D3D3';">
+                    <thead class="border rounded-top" bgcolor="#d0d3db">
                         <tr>
                         <th></th>
-                        <th>Source</th>
+                        <th >Source</th>
                         <th>Name</th>
                         <th>Address</th>
                         <th>Phone</th>
                         <th>Rating</th>
-                        <th>Listed</th>
-                        <th>Status</th>
+                        <th>Verified (Blue Tick)</th>
+                        <th>Published</th>
                         <th>Action</th>
                         </tr>
                     </thead>
@@ -80,26 +80,26 @@
                         <td><button class="btn btn-primary disabled">Update</button></td>
                         </tr>
                         <tr>
-                        <td><i class="fa fa-yahoo" style="font-size:20px" > </i></td>
-                        <td>Yahoo!</td>
-                        <td>ABC Dental</td>
-                        <td>2101 California St</td>
-                        <td>222.222.222</td>
-                        <td>4/5</td>
-                        <td>No</td>
-                        <td><a href="#"><i class="material-icons green-text text-darken-4">clear</i></a></td>
-                        <td><button class="btn btn-primary disabled">Update</button></td>
+                            <td><i class="fa fa-yahoo" style="font-size:20px" > </i></td>
+                            <td>Yahoo!</td>
+                            <td>ABC Dental</td>
+                            <td>2101 California St</td>
+                            <td>222.222.222</td>
+                            <td>4/5</td>
+                            <td>No</td>
+                            <td><a href="#"><i class="material-icons green-text text-darken-4">clear</i></a></td>
+                            <td><button class="btn btn-primary disabled">Update</button></td>
                         </tr>
                         <tr>
-                        <td><i class="fa fa-yelp" style="font-size:20px" > </i></td>
-                        <td>Yelp</td>
-                        <td>ABC Dental</td>
-                        <td>2101 California St</td>
-                        <td>333.333.333</td>
-                        <td>3/5</td>
-                        <td>No</td>
-                        <td><a href="#"><i class="material-icons green-text text-darken-4">clear</i></a></td>
-                        <td><button class="btn btn-primary disabled">Update</button></td>
+                            <td><i class="fa fa-yelp" style="font-size:20px" > </i></td>
+                            <td>Yelp</td>
+                            <td>ABC Dental</td>
+                            <td>2101 California St</td>
+                            <td>333.333.333</td>
+                            <td>3/5</td>
+                            <td>No</td>
+                            <td><a href="#"><i class="material-icons green-text text-darken-4">clear</i></a></td>
+                            <td><button class="btn btn-primary disabled">Update</button></td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-foursquare" style="font-size:20px" > </i></td>
@@ -112,6 +112,25 @@
                             <td><a href="#"><i class="material-icons green-text text-darken-4">check</i></a></td>
                             <td><button class="btn btn-primary disabled">Update</button></td>
                         </tr>
+
+                        <!--{% for each_page in page_list %}-->
+
+                        <!--<tr>-->
+                        <!--    <td><i class="fa fa-like" style="font-size:20px" > </i></td>-->
+                        <!--    <td>Faceboooook</td>-->
+                        <!--    <td>{{ each_page }}</td>-->
+                        <!--    <td>2101 California St</td>-->
+                        <!--    <td>{{ each_page.phone }}</td>-->
+                        <!--    <td>{{ each_page.overall_star_rating }} / 5</td>-->
+                        <!--    <td>No</td>-->
+                        <!--    <td><a href="#"><i class="material-icons green-text text-darken-4">check</i></a></td>-->
+                        <!--    <td><button class="btn btn-primary disabled">Update</button></td>-->
+                        <!--</tr>-->
+
+
+                        <!--{% endfor %}-->
+
+
                     </tbody>
                 </table>
                 </div>
