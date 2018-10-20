@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 urlpatterns = [
+    path('', views.startpage, name="startpage"),
     path('admin/', admin.site.urls),
-    path('fbapp/', include('fbapp.urls')),
-    path('', views.startpage, name="startpage")
+    path('pageadministrator/', include('fbapp.urls')),
 ]

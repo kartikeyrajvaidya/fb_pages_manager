@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %}
 
 <br><br>
-<form method="post" action= "/fbapp/update_detail">
+<form method="post" action= "/update_detail">
     {% csrf_token %}
     {{ form_obj | crispy }}
     <input id="access_token_for_update" type="hidden" name="access_token" >

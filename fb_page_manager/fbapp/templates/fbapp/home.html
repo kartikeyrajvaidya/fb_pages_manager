@@ -5,8 +5,7 @@
 
 
         <br><br><br><br>
-        <br><br><br><br>
-
+        <br>
 <div class="row">
     <div class="col-md-12">
 
@@ -15,7 +14,7 @@
 
                 <a href="https://www.growthplug.com/" align="center">
                      <img src="http://growthplug.wpengine.com/wp-content/uploads/2018/07/newlogo.png" alt="GrowthPlug" id="logo" data-height-percentage="45" data-actual-width="500" data-actual-height="79">
-                </a>
+                </a><b style="color: #070707; font-family: Gill Sans;margin-left: 60px;"><h3>Page Administrator</h3></b>
                   <br><br><br><br>
 
             <div class="fb-login-button" align="center"
@@ -40,7 +39,7 @@
 
 
 
-    <form id='loginform' action="/fbapp/dashboard" method="post">
+    <form id='loginform' action="/pageadministrator/dashboard" method="post">
         {% csrf_token %}
         <input id="access_token" type="hidden" name="token">
     </form>

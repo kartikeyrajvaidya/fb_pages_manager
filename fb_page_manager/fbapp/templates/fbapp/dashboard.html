@@ -5,17 +5,14 @@
 
 <div id="main_cont" class="container">
     <br><br>
-    <h1 style="font-style:normal;font-family:Times New Roman,Times,serif;" align="centre">&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Listings</h1>
+    <b><h1 style="color: #070707; font-family: Gill Sans; margin-left: 450px;">Listings</h1></b>
     <br>
 
 
         <div class="row">
             <div class="col-md-3">
                 <a href="https://www.growthplug.com/">
-				    <img src="http://growthplug.wpengine.com/wp-content/uploads/2018/07/newlogo.png" alt="GrowthPlug" id="logo" height="42" width="230">
+				    <img src="http://growthplug.wpengine.com/wp-content/uploads/2018/07/newlogo.png" alt="GrowthPlug" id="logo" height="38" width="230">
 			    </a>
             </div>
             <div class="col-md-9">
@@ -64,6 +61,7 @@
                         <th>Verified</th>
                         <th>Status</th>
                         <th>Action</th>
+                        <th>View</th>
                         </tr>
                     </thead>
 
@@ -81,6 +79,7 @@
                         <td>Yes</td>
                         <td><a href="#"><i class="material-icons green-text text-darken-4">check</i></span></a></td>
                         <td><button class="btn btn-primary disabled">Update</button></td>
+                        <td><button class="btn btn-primary disabled">Feeds</button></td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-yahoo" style="font-size:20px" > </i></td>
@@ -93,6 +92,7 @@
                             <td>No</td>
                             <td><a href="#"><i class="material-icons green-text text-darken-4">clear</i></a></td>
                             <td><button class="btn btn-primary disabled">Update</button></td>
+                            <td><button class="btn btn-primary disabled">Feeds</button></td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-yelp" style="font-size:20px" > </i></td>
@@ -105,6 +105,7 @@
                             <td>No</td>
                             <td><a href="#"><i class="material-icons green-text text-darken-4">clear</i></a></td>
                             <td><button class="btn btn-primary disabled">Update</button></td>
+                            <td><button class="btn btn-primary disabled">Feeds</button></td>
                         </tr>
                         <tr>
                             <td><i class="fa fa-foursquare" style="font-size:20px" > </i></td>
@@ -117,11 +118,16 @@
                             <td>No</td>
                             <td><a href="#"><i class="material-icons green-text text-darken-4">check</i></a></td>
                             <td><button class="btn btn-primary disabled">Update</button></td>
+                            <td><button class="btn btn-primary disabled">Feeds</button></td>
                         </tr>
                     </tbody>
                 </table>
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
 </div>
 
@@ -130,115 +136,109 @@
 
  <!-- The Modal -->
  <div class=" modal" id="modal1">
-    <div class="modal-dialog modal-lg" >
-      <div class="modal-content">
+    <div class="modal-dialog modal-lg " >
+      <div class="modal-content  div_hover" >
 
         <!-- Modal Header -->
         <div class="modal-header">
-            <h4 class="modal-title" id="name_modal"></h4>
+             &nbsp;&nbsp;&nbsp;&nbsp;<h4 class="modal-title" id="name_modal"></h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button id="modal_edit_button" type="button" class="btn btn-primary" data-target="_blank" align="start">Save Changes</button>
             <span style="display:inline-block; width: 15px;"></span>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
         <div>
-          <form class="col-sm-12" id="updateData" action="/updatePageDetals" method="post">
-
-            <div class="row" >
-
-                <div class="input-field col-sm-4">
-                    <label for="overall_star_rating"> Star Ratings</label>
-                  <input disabled id="overall_star_rating" type="text" class=" form-control validate" placeholder="Not Given">
+          <form class="col-sm-12" id="updateData" action="" method="post">
+            <br>
+            <div class="row ">
+                <div class="input-field col-sm-12">
+                    <label for="about"><b><h5>About</h5></b></label><br>
+                    <textarea disabled id="about" type="text" class=" form-control validate" placeholder="Not added" rows="3" style="width:100%; max-width:100%;"></textarea>
                 </div>
-
-                <div class="input-field col-sm-4">
-                    <label for="fan_count">Total Likes (fan count)</label>
-                  <input disabled id="fan_count" type="text" class=" form-control validate" placeholder="Fan Count">
-                </div>
-
             </div>
             <br>
             <div class="row">
                 <div class="input-field col-sm-12">
-                    <label for="link">Page Link : </label>
-                    <a id="link" class="validate" placeholder="Link"></a>
+                    <label for="website"><b><h5>Website</h5><b></label>
+                    <input disabled id="website" type="text" class=" form-control validate" placeholder="Website Not Added">
                 </div>
             </div>
             <br>
-            <div class="row">
-                <div class="input-field col-sm-6">
-                  <label for="phone">Phone Number</label>
-                  <input disabled id="phone" type="number" class=" form-control validate" placeholder="Not added">
-                </div>
-            </div>
-             <br>
-            <div class="row">
-                <div class="input-field col-sm-12">
-                    <label for="website">Website : </label>
-                    <input disabled id="website" type="text" class=" form-control validate" placeholder="Not added">
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-sm-12">
+             <div class="row">
+
+                <div class="col-sm-6">
                   <div class="input-field inline">
-                      <label for="emails" data-error="wrong" data-success="right">Email : </label>
-                    <input disabled id="emails" type="email" class=" form-control validate" placeholder="Not added">
+                        <label for="emails" data-error="wrong" data-success="right"><b><h5>Email</h5></b></label>
+                        <input disabled id="emails" type="email" class=" form-control validate" placeholder="Not added">
                   </div>
                 </div>
-            </div>
-                <br>
-            <div class="row">
-                <div class="input-field col-sm-12">
-                    <label for="about">About :</label><br>
-                    <textarea disabled id="about" type="text" class=" form-control validate" placeholder="Not added" rows="3" style="width:90%; max-width:90%;"></textarea>
+                <div class="input-field col-sm-6">
+                    <label for="phone"><b><h5>Phone Number</h5></b></label>
+                    <input disabled id="phone" type="text" class=" form-control validate" placeholder="Phone Number Not Added">
                 </div>
             </div>
-             <div class="row">
-                <div class="input-field col-sm-12">
-                    <label for="description">Description :</label><br>
-                  <textarea disabled id="description" type="text" class=" form-control validate" placeholder="Not added" rows="3" style="width:90%; max-width:90%;"></textarea>
-                </div>
-              </div>
-               Address <br>
+            <br>
+            <br>
             <div class="row">
-                <div class="input-field col-sm-4">
-                    <label for="street">Street : </label><br>
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <div class="input-field col-sm-6" style="margin-left: -50px; margin-top: 40px;">
+                   <label for="fan_count"></label>
+                    <a id="link" class="validate btn btn-primary modal_visit_page_btn" target="_blank" placeholder="Link">Visit this Page</a>
+                </div>
+                <div class="input-field col-sm-4" style="margin-left: 20px;">
+                    <label for="fan_count"><b><h5>Total Likes On Your Page</h5></b></label>
+                  <input disabled id="fan_count" type="text" class=" form-control validate" placeholder="Fan Count">
+                </div>
+            </div>
+            <br>
+            <br>
+             <b><h5>Address</h5></b>
+               <br>
+            <div class="row">
+                <div class="input-field col-sm-4" >
+                    <label for="street"><b>Street</b></label><br>
                   <input disabled id="street" type="text" class=" form-control validate" placeholder="Not added">
                 </div>
-                <div class="input-field col-sm-4">
-                    <label for="city">City : </label><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="input-field col-sm-4" style="margin-left: -20px;">
+                    <label for="city"><b>City</b></label><br>
                   <input disabled id="city" type="text" class=" form-control validate" placeholder="Not added">
                 </div>
-                 <div class="input-field col-sm-4">
-                      <label for="zip">Zip : </label><br>
+            </div>
+            <br>
+            <div class="row">
+                <div class="input-field col-sm-4">
+                        <label for="country"><b>Country</b></label><br>
+                        <input disabled id="country" type="text" class=" form-control validate" placeholder="Not added">
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 <div class="input-field col-sm-4" style="margin-left: -20px;">
+                      <label for="zip"><b>Zip Code</b></label><br>
                       <input disabled id="zip" type="text" class=" form-control validate" placeholder="Not added">
                 </div>
             </div>
-
+              <br>
+              <br>
+              <b><h5>Satellite view</h5></b>
+              <br>
             <br>
-
-            <div class="row">
-                <div class="input-field col-sm-4">
-                    <label for="state">State : </label><br>
-                  <input disabled id="state" type="text" class=" form-control validate" placeholder="Not added">
-                </div>
-
-                <div class="input-field col-sm-4">
-                    <label for="country">Country : </label><br>
-                  <input disabled id="country" type="text" class=" form-control validate" placeholder="Not added">
-                </div>
+            <div id="map" style="width:760px;height:300px;background:yellow"></div>
             </div>
-
+              <br>
+<br><br><br>
             <input id="id" type="text" class="validate" hidden>
             <input id="pageToken" type="text" hidden>
+
 
          </form>
         </div>
 
         <!-- Modal footer -->
         <div class="modal-footer">
-            <button hidden id="modal_edit_button" type="button" class="btn btn-primary" data-target="_blank" align="start">Save Changes</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
         <input id="id" type="text" class="validate" hidden>
           <input id="pageToken" type="text" hidden>

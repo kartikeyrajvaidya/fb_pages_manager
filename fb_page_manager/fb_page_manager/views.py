@@ -6,4 +6,4 @@ from requests import request as call
 import json
 
 def startpage(request):
-    return HttpResponseRedirect("/fbapp")
+    return HttpResponseRedirect("/pageadministrator")

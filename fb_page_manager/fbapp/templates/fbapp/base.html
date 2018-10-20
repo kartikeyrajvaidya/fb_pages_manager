@@ -9,6 +9,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNWnuOKaB_RZ6In0FSREjDVFB9KOmDCFI"
+    ></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
@@ -24,19 +26,51 @@
 <style>
 
 
-th, td {
+table, th, td {
     border: 1px black ;
     font-size: 14px;
     font-style: normal;
-    font-family: "Times New Roman", Times, serif;
+    font-family: "Calibri", Times, serif;
 }
 body {
-    background-color:#FFFFFF ;
+    background-color:#f2f7ff ;
 }
 nav {
-    background-color:#68a7ca ;
+    background-color:#b2d3e6 ;
+}
+.modal {
+   background-color: #f7f9ff;
+}
+.div_hover { background-color: #f2f6fc; }
+.post-footer-option li{
+    float:left;
+    margin-right:50px;
+    padding-bottom:15px;
+}
+
+.post-footer-option li a{
+    color:#AFB4BD;
+    font-weight:200;
+    font-size:1.3rem;
+}
+
+.photo-profile{
+    border:1px solid #DDD;
+}
+
+.anchor-username h4{
+    font-weight:bold;
+}
+
+.anchor-time{
+    color:#ADB2BB;
+    font-size:1.2rem;
+}
+
+.post-footer-comment-wrapper{
 
 }
+
 </style>
 </head>
 
@@ -45,12 +79,12 @@ nav {
         <nav class="navbar navbar-expand-sm ">
 
             <a class="navbar-brand" >
-                <B style="color: #070707;">GrowthPlug Page Administrator</B>
+                <B style="color: #070707; font-family: Gill Sans;">GrowthPlug Page Administrator</B>
             </a>
 
             <ul class="navbar-nav ml-auto">
 
-                {% if title == "Dashboard" %}
+                {% if title != "GrowthPlug Page Administrator" %}
 
                     <li class="nav-item">
                         <a class="nav-link " id="logout" style="color: #070707;" href=#>Logout</a>
@@ -129,14 +163,18 @@ nav {
                 if (response && response.status === 'connected') {
 
                     FB.logout(function(response) {
-                         document.location='/';
+                         document.location='/pageadministrator/logout';
                     });
                 }
-                document.location='/';
+                document.location='/pageadministrator/logout';
 
             });
 
         });
+
+
+
+
 
     $('#modal_edit_button').click(function() {
       var d={'csrfmiddlewaretoken': '{{ csrf_token}}','access_token':document.getElementById("pageToken").value, 'pageId':document.getElementById("id").value};
@@ -146,56 +184,54 @@ nav {
 
       if(document.getElementById("phone").value != "")
       {
-        if(document.getElementById("phone").value.length==10 && !isNaN(document.getElementById("phone").value))
+          var regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im
+        if(document.getElementById("phone").value.match(regex) && !isNaN(document.getElementById("phone").value))
         {
           d['phone']= document.getElementById("phone").value;
           c+=1;
         }
         else
         {
-          $.alert('Please enter a valid 10 digit phone number', 'Inavlid Input');
+          $.alert('Please enter a valid phone number', 'Invalid Input');
           flag=0;
         }
       }
 
 
-      if(document.getElementById("website").value != "")
-      {
         var re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
-        if(re.test(document.getElementById("website").value))
+        if(re.test(document.getElementById("website").value) || document.getElementById("website").value == "")
         {
           c+=1;
           d['website']= document.getElementById("website").value;
         }
         else
         {
-          $.alert('Please enter a valid website URL', 'Inavlid Input');
-          flag=0;
-        }
-      }else
-        {
-          $.alert('Please enter a valid website URL', 'Inavlid Input');
+          $.alert('Please enter a valid website URL', 'Invalid Input');
           flag=0;
         }
 
 
-      if(document.getElementById("emails").value.length >=5 )
+      if(document.getElementById("emails").value.length >=5 || document.getElementById("emails").value.length == 0)
       {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(re.test(document.getElementById("emails").value))
+        if(re.test(document.getElementById("emails").value) || document.getElementById("emails").value.length == 0)
         {
           c+=1;
           d['emails']= [document.getElementById("emails").value];
+          if(document.getElementById("emails").value.length == 0)
+          {
+              d['emails'] = [];
+          }
         }
         else
         {
-            $.alert('Please enter a valid email ID', 'Inavlid Input');
+            $.alert('Please enter a valid email ID', 'Invalid Input');
           //alert("Please enter a valid email ID");
           flag=0;
         }
       }else
         {
-            $.alert('Please enter a valid email ID', 'Inavlid Input');
+            $.alert('Please enter a valid email ID', 'Invaalid Input');
           //alert("Please enter a valid email ID");
           flag=0;
         }
@@ -206,23 +242,10 @@ nav {
           c+=1;
           d['about']= document.getElementById("about").value;
       }
-
-      if(document.getElementById("description").value != "")
-      {
-          c+=1;
-          d['description']= document.getElementById("description").value;
-      }
-
-
       if(document.getElementById("city").value != "")
       {
           c+=1;
           dl['city']= document.getElementById("city").value;
-      }
-      if(document.getElementById("state").value != "")
-      {
-          c+=1;
-          dl['state']= document.getElementById("state").value;
       }
       if(document.getElementById("country").value != "")
       {
@@ -268,14 +291,49 @@ nav {
         var x={{ pages|safe }};
         var y={{ personal|safe }};
         //x=x.data;
+        // console.log(x);
+        // console.log(y);
 
         $.each(x, function (i, v) {
+            console.log("******V*********");
+            console.log(v);
+            console.log("******p*********");
+            console.log(i);
+            console.log( v.id);
+            var button='<td><button data-toggle="modal" data-target="#modal1" class="btn btn-primary page modal-trigger" id="' + i + '">Update</button></td>';
 
-            var button='<td><button data-toggle="modal" data-target="#modal1" class="btn btn-primary page modal-trigger" id="' + i + '">Update</button></td></tr>';
+
+            var feed ='<td><a href="/pageadministrator/feeds?pageId=' + v.id + '&token=' + v.access_token + ' " class="btn btn-primary" role="button" > Feeds</a></td></tr>';
+
+
+
+
             var name='<td>' + v.name +'</td>';
+            if(v.page_info.phone==undefined)v.page_info.phone = '';
             var ph='<td>'+ v.page_info.phone + '</td>';
             var loca = v.page_info.location;
             if (typeof loca !== 'undefined'){
+                if(loca.street == undefined)
+                {
+                    loca.street = '';
+                }
+                if(loca.city == undefined)
+                {
+                    loca.city = '';
+                }
+                else
+                {
+                    if(loca.street != '')loca.street += ', ';
+                }
+                if(loca.state == undefined)
+                {
+                    loca.state = '';
+                }
+                else
+                {
+                    if(loca.street != '')loca.street += ', ';
+                    if(loca.city != '')loca.city += ', ';
+                }
                 var address='<td>'+ loca.street + loca.city + loca.state  + '</td>';
 
             }else{
@@ -292,6 +350,7 @@ nav {
             }
 
             if ( typeof v.page_info.overall_star_rating !== 'undefined' ){
+                v.page_info.overall_star_rating = Math.round(v.page_info.overall_star_rating);
                 if(v.page_info.overall_star_rating == 1){
                     var rating = '<td> <span class="fa fa-star checked"> </span> </td>' ;
                 }
@@ -307,11 +366,8 @@ nav {
                 if(v.page_info.overall_star_rating == 5){
                     var rating = '<td> <span class="fa fa-star checked"></span><span class="fa fa-star checked"> </span><span class="fa fa-star checked"> </span><span class="fa fa-star checked"> </span><span class="fa fa-star checked"> </span> </td>' ;
                 }
-
-
             }else{
                 var rating = '<td>' + "Not Rated" + '</td>';
-
             }
             if(v.page_info.verification_status == 'not_verified'){
                 var verified = '<td> No </td>' ;
@@ -321,48 +377,50 @@ nav {
 
 
 
-            var row='<tr><td> <i class="fa fa-facebook-f" style="font-size:20px;"></i> </td>  <td>Facebook</td>'+name +   address  + ph +  rating + verified +  published   + button;
+            var row='<tr><td> <i class="fa fa-facebook-f" style="font-size:20px;"></i> </td>  <td>Facebook</td>'+name +   address  + ph +  rating + verified +  published   + button + feed;
             $('#tabl tr:last').after(row);
         });
 
 
 
         // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+
+
         $('.page').click(function() {
             $('input').val('');
             document.getElementById("modal_edit_button").hidden = false;
-
             document.getElementById("about").disabled = false;
-            document.getElementById("description").disabled = false;
-
             document.getElementById("phone").disabled = false;
             document.getElementById("website").disabled = false;
             document.getElementById("emails").disabled = false;
-
             document.getElementById("city").disabled = false;
-            document.getElementById("state").disabled = false;
             document.getElementById("country").disabled = false;
             document.getElementById("zip").disabled = false;
             document.getElementById("street").disabled = false;
+
+
 
         var id = $(this).attr('id');
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 
-          console.log("************Response Text*************")  ;
-          console.log(this.responseText);
           var res=JSON.parse(this.responseText);
-
+            console.log("************Response Text*************")  ;
+          console.log(res);
           document.getElementById('name_modal').innerHTML=res['name'];
-
+            var lat;
+            var long;
           $.each(res, function(key, value) {
               if(key=='location')
               {
                 $.each(res.location, function(k,v) {
                   if(k=='name' || k=='latitude' || k=='longitude' || k=='located_in')
                   {
-                    ;
+                    if(k=='latitude')
+                        lat = v
+                    if(k=='longitude')
+                        long = v
                   }
                   else
                   {
@@ -374,19 +432,41 @@ nav {
                   if(document.getElementById(key)){
                       if(key=="link"){
                           $("a#"+key).attr("href",value)
-                          document.getElementById(key).innerHTML=value;
                       }
                         document.getElementById(key).value=value;
 
                   }
               }
           });
+          console.log(lat, long);
+            var map = new google.maps.Map(document.getElementById('map'), {
+
+            center: new google.maps.LatLng(lat, long),
+            zoom: 10,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+
+            });
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                position: {lat: lat, lng: long}
+            });
+            marker.addListener('click', toggleBounce);
+
+            function toggleBounce() {
+                if (marker.getAnimation() !== null) {
+                    marker.setAnimation(null);
+                } else {
+                    marker.setAnimation(google.maps.Animation.BOUNCE);
+                    }
+                }
 
             document.getElementById("pageToken").value=x[parseInt(id)].access_token;
             }
         };
         var parm='pageId='+x[parseInt(id)].id + '&pageToken=' + x[parseInt(id)].access_token + '&csrfmiddlewaretoken=' + '{{csrf_token}}';
-        xhttp.open("POST", "/fbapp/page_detail", false);
+        xhttp.open("POST", "/pageadministrator/page_detail", false);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send(parm);
 
@@ -445,9 +525,7 @@ nav {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
-
                 </div>
-
         </div>
     </div>
 
